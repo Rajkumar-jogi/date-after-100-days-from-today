@@ -1,11 +1,14 @@
 const express = require('express')
-const {add} = require('date-fns')
+const addDays = require('date-fns/addDays')
 const app = express()
 
-app.get('/', async (request, response) => {
+app.get('/', (request, response) => {
   const dateTime = new Date()
 
-  const dateAfter100Days = await add(new Date(dateTime), {days: 100})
+  const dateAfter100Days = addDays(
+    new Date(dateTime.getFullYear(), dateTime.getMonth(), dateTime.getDate()),
+    100,
+  )
 
   response.send(
     `${dateAfter100Days.getDate()}/${
